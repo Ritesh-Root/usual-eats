@@ -37,14 +37,14 @@ export const api = {
     );
     return data.orders;
   },
-  async getOrder(id: string): Promise<OrderDetail> {
-    return call<OrderDetail>(`/orders/${id}`, { method: "GET" }, () => mockOrderDetail(id));
+  async getOrder(id: string, hint?: OrderSummary): Promise<OrderDetail> {
+    return call<OrderDetail>(`/orders/${id}`, { method: "GET" }, () => mockOrderDetail(id, hint));
   },
-  async reorder(sourceOrderId: string): Promise<ReorderCart> {
+  async reorder(sourceOrderId: string, hint?: OrderSummary): Promise<ReorderCart> {
     const cart = await call<ReorderCart>(
       "/reorder",
       { method: "POST", body: JSON.stringify({ source_order_id: sourceOrderId }) },
-      () => mockReorder(sourceOrderId),
+      () => mockReorder(sourceOrderId, hint),
     );
     cartStore.set(cart.cart_id, cart);
     return cart;

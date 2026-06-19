@@ -20,7 +20,7 @@ function History() {
 
   async function handleReorder(o: OrderSummary) {
     setPending(o.order_id);
-    const cart = await api.reorder(o.order_id);
+    const cart = await api.reorder(o.order_id, o);
     cart.issues.forEach((i) => tracker.noteEdgeCase(i.code));
     cartStore.setCart(cart);
     navigate({ to: "/review" });
