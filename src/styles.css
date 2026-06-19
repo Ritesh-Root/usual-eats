@@ -146,5 +146,16 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: ui-rounded, "SF Pro Rounded", "Nunito", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
+}
+
+@theme inline {
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-mint: var(--brand-mint);
+  --color-brand-lavender: var(--brand-lavender);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-ink: var(--brand-ink);
 }
