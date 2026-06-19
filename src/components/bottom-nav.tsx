@@ -16,7 +16,8 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Primary"
-      className="absolute bottom-3 left-3 right-3 z-30 rounded-full bg-brand-ink/95 backdrop-blur shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] px-2 py-2 flex items-center justify-between"
+      className="absolute left-3 right-3 z-30 rounded-full bg-brand-ink/95 backdrop-blur shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] px-2 py-2 flex items-center justify-between"
+      style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       {TABS.map((t) => {
         const active =
