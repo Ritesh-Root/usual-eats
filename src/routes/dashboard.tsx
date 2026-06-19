@@ -32,7 +32,7 @@ function Dashboard() {
       <header className="px-6 pt-8 pb-4">
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Your stats</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground">
-          Hello, {user.name.split(" ")[0]} 📊
+          Hello, {user.name.split(" ")[0]}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">A peek at your reorder habits.</p>
       </header>

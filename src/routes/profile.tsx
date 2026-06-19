@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { MapPin, CreditCard, Settings, Receipt, type LucideIcon } from "lucide-react";
 import { useUser, userStore } from "../lib/user-store";
 
 export const Route = createFileRoute("/profile")({
@@ -40,10 +41,10 @@ function Profile() {
       </section>
 
       <nav className="px-6 mt-6 space-y-2" aria-label="Profile sections">
-        <Row to="/addresses" label="Saved addresses" sub={`${user.addresses.length} saved · default ${user.addresses.find((a) => a.id === user.defaultAddressId)?.label ?? "—"}`} icon="📍" />
-        <Row to="/payments" label="Payment methods" sub={`${user.payments.length} saved · default ${user.payments.find((p) => p.id === user.defaultPaymentId)?.label.split(" ")[0] ?? "—"}`} icon="💳" />
-        <Row to="/settings" label="Preferences" sub="Notifications, language, dietary" icon="⚙️" />
-        <Row to="/history" label="Order history" sub="All past orders" icon="🧾" />
+        <Row to="/addresses" label="Saved addresses" sub={`${user.addresses.length} saved · default ${user.addresses.find((a) => a.id === user.defaultAddressId)?.label ?? "—"}`} Icon={MapPin} />
+        <Row to="/payments" label="Payment methods" sub={`${user.payments.length} saved · default ${user.payments.find((p) => p.id === user.defaultPaymentId)?.label.split(" ")[0] ?? "—"}`} Icon={CreditCard} />
+        <Row to="/settings" label="Preferences" sub="Notifications, language, dietary" Icon={Settings} />
+        <Row to="/history" label="Order history" sub="All past orders" Icon={Receipt} />
       </nav>
 
       <div className="px-6 mt-6 space-y-2">
@@ -73,14 +74,14 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function Row({ to, label, sub, icon }: { to: "/addresses" | "/payments" | "/settings" | "/history"; label: string; sub: string; icon: string }) {
+function Row({ to, label, sub, Icon }: { to: "/addresses" | "/payments" | "/settings" | "/history"; label: string; sub: string; Icon: LucideIcon }) {
   return (
     <Link
       to={to}
       className="flex items-center gap-3 rounded-2xl bg-card border border-border/60 p-3 hover:bg-muted"
     >
-      <span className="w-10 h-10 rounded-xl bg-brand-mint/60 grid place-items-center text-lg">
-        {icon}
+      <span className="w-10 h-10 rounded-xl bg-brand-mint/60 grid place-items-center text-brand-ink">
+        <Icon className="w-5 h-5" />
       </span>
       <div className="flex-1 min-w-0">
         <p className="font-semibold text-foreground">{label}</p>

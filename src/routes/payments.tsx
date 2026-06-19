@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { Smartphone, CreditCard, Wallet, Banknote, type LucideIcon } from "lucide-react";
 import { useUser, userStore, type PaymentMethod } from "../lib/user-store";
 
 export const Route = createFileRoute("/payments")({
@@ -7,11 +8,11 @@ export const Route = createFileRoute("/payments")({
   component: Payments,
 });
 
-const TYPES: { value: PaymentMethod["type"]; label: string; icon: string }[] = [
-  { value: "UPI", label: "UPI", icon: "📲" },
-  { value: "CARD", label: "Card", icon: "💳" },
-  { value: "WALLET", label: "Wallet", icon: "👛" },
-  { value: "COD", label: "Cash", icon: "💵" },
+const TYPES: { value: PaymentMethod["type"]; label: string; Icon: LucideIcon }[] = [
+  { value: "UPI", label: "UPI", Icon: Smartphone },
+  { value: "CARD", label: "Card", Icon: CreditCard },
+  { value: "WALLET", label: "Wallet", Icon: Wallet },
+  { value: "COD", label: "Cash", Icon: Banknote },
 ];
 
 function Payments() {
@@ -40,7 +41,7 @@ function Payments() {
       <div className="flex-1 overflow-y-auto p-5 pb-28 space-y-3">
         {user.payments.map((p) => {
           const isDefault = p.id === user.defaultPaymentId;
-          const icon = TYPES.find((t) => t.value === p.type)?.icon ?? "💳";
+          const Icon = TYPES.find((t) => t.value === p.type)?.Icon ?? CreditCard;
           return (
             <article
               key={p.id}
@@ -49,8 +50,8 @@ function Payments() {
               }`}
             >
               <div className="flex items-start gap-3">
-                <span className="w-10 h-10 rounded-xl bg-brand-mint/60 grid place-items-center text-lg shrink-0">
-                  {icon}
+                <span className="w-10 h-10 rounded-xl bg-brand-mint/60 grid place-items-center text-brand-ink shrink-0">
+                  <Icon className="w-5 h-5" />
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
@@ -106,7 +107,7 @@ function Payments() {
                       : "bg-card border-border"
                   }`}
                 >
-                  <span className="block text-base">{t.icon}</span>
+                  <span className="grid place-items-center mb-1"><t.Icon className="w-4 h-4" /></span>
                   {t.label}
                 </button>
               ))}
