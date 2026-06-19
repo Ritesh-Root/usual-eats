@@ -235,7 +235,7 @@ function ScenarioPicker() {
       : new URLSearchParams(window.location.search).get("scenario") ?? "HAPPY";
   return (
     <details data-no-tap className="mx-6 mt-8 rounded-2xl border border-dashed border-border bg-muted/40 p-3 text-xs text-muted-foreground">
-      <summary className="cursor-pointer font-semibold text-foreground">🧪 Demo: simulate edge case</summary>
+      <summary className="cursor-pointer font-semibold text-foreground">Demo: simulate edge case</summary>
       <div className="mt-2 flex flex-wrap gap-1.5">
         {SCENARIOS.map((s) => (
           <a
