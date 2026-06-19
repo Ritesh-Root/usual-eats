@@ -47,7 +47,9 @@ function Review() {
     <div className="flex-1 flex flex-col overflow-hidden">
       <header className="flex items-center gap-3 px-5 pt-6 pb-3 border-b border-border/60">
         <Link to="/" aria-label="Back" className="w-10 h-10 grid place-items-center rounded-full bg-muted text-foreground">
-          ←
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
         </Link>
         <div>
           <p className="text-[11px] uppercase tracking-wider text-muted-foreground">Review reorder</p>
@@ -304,7 +306,25 @@ function IssueBanner({
     <div className={`rounded-2xl p-3 ${tone}`}>
       <div className="flex items-start gap-2">
         <span aria-hidden className="text-base leading-none mt-0.5">
-          {issue.severity === "blocker" ? "🚧" : issue.severity === "warning" ? "⚠️" : "ℹ️"}
+          {issue.severity === "blocker" ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          ) : issue.severity === "warning" ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          )}
         </span>
         <p className="text-sm font-semibold flex-1">{issue.message}</p>
       </div>

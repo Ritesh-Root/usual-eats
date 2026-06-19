@@ -20,7 +20,6 @@ export interface Issue {
 
 export interface ItemPreview {
   name: string;
-  emoji?: string;
 }
 
 export interface OrderSummary {
@@ -46,7 +45,6 @@ export interface CartItem {
   available: boolean;
   price_changed: boolean;
   substitute?: { item_id: string; name: string; unit_price: number } | null;
-  emoji?: string;
 }
 
 export interface ReorderCart {

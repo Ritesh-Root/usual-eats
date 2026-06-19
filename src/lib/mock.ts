@@ -23,8 +23,8 @@ export const MOCK_HISTORY: OrderSummary[] = [
     restaurant_id: "r_tiffin",
     restaurant_name: "Anjali's Home Tiffin",
     items_preview: [
-      { name: "Veg Thali", emoji: "🍛" },
-      { name: "Masala Chai", emoji: "🍵" },
+      { name: "Veg Thali" },
+      { name: "Masala Chai" },
     ],
     item_count: 3,
     total: 245,
@@ -38,8 +38,8 @@ export const MOCK_HISTORY: OrderSummary[] = [
     restaurant_id: "r_southi",
     restaurant_name: "Sri Krishna Idli House",
     items_preview: [
-      { name: "Masala Dosa", emoji: "🥞" },
-      { name: "Filter Coffee", emoji: "☕" },
+      { name: "Masala Dosa" },
+      { name: "Filter Coffee" },
     ],
     item_count: 2,
     total: 180,
@@ -53,8 +53,8 @@ export const MOCK_HISTORY: OrderSummary[] = [
     restaurant_id: "r_biryani",
     restaurant_name: "Paradise Biryani",
     items_preview: [
-      { name: "Chicken Biryani", emoji: "🍗" },
-      { name: "Raita", emoji: "🥣" },
+      { name: "Chicken Biryani" },
+      { name: "Raita" },
     ],
     item_count: 2,
     total: 420,
@@ -68,7 +68,7 @@ export const MOCK_HISTORY: OrderSummary[] = [
     restaurant_id: "r_pizza",
     restaurant_name: "Napoli Wood-Fired Pizza",
     items_preview: [
-      { name: "Margherita", emoji: "🍕" },
+      { name: "Margherita" },
     ],
     item_count: 1,
     total: 340,
@@ -114,7 +114,6 @@ function baseCart(sourceId: string, hint?: OrderSummary): ReorderCart {
         original_unit_price: Math.round((src.total ?? 240) * 0.7),
         available: true,
         price_changed: false,
-        emoji: src.items_preview[0]?.emoji ?? "🍛",
       },
       {
         item_id: "i_2",
@@ -125,7 +124,6 @@ function baseCart(sourceId: string, hint?: OrderSummary): ReorderCart {
         original_unit_price: Math.max(40, Math.round((src.total ?? 240) * 0.3)),
         available: true,
         price_changed: false,
-        emoji: src.items_preview[1]?.emoji ?? "🍵",
       },
     ],
     delivery_address: defaultAddress(),
