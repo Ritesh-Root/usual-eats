@@ -5,6 +5,7 @@ import { cartStore } from "../lib/cart-store";
 import { useTapTracker } from "../lib/tap-tracker";
 import { useState } from "react";
 import type { OrderSummary } from "../lib/types";
+import { foodImage } from "../lib/food-images";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -141,13 +142,15 @@ function UsualCard({
         <div className="flex flex-col items-end">
           <div className="flex -space-x-2">
             {order.items_preview.slice(0, 3).map((it, i) => (
-              <span
+              <img
                 key={i}
-                className="w-11 h-11 rounded-full bg-white grid place-items-center text-xl shadow-sm border-2 border-white"
-                aria-label={it.name}
-              >
-                {it.emoji ?? "🍽️"}
-              </span>
+                src={foodImage(it.name)}
+                alt={it.name}
+                loading="lazy"
+                width={44}
+                height={44}
+                className="w-11 h-11 rounded-full object-cover shadow-sm border-2 border-white bg-white"
+              />
             ))}
           </div>
         </div>
@@ -181,9 +184,14 @@ function MiniOrderRow({
 }) {
   return (
     <div className="flex items-center gap-3 rounded-2xl bg-card border border-border/60 p-3">
-      <div className="w-12 h-12 rounded-xl bg-muted grid place-items-center text-2xl shrink-0">
-        {order.items_preview[0]?.emoji ?? "🍽️"}
-      </div>
+      <img
+        src={foodImage(order.items_preview[0]?.name ?? "")}
+        alt={order.items_preview[0]?.name ?? "Item"}
+        loading="lazy"
+        width={48}
+        height={48}
+        className="w-12 h-12 rounded-xl object-cover shrink-0 bg-muted"
+      />
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold truncate text-foreground">{order.restaurant_name}</p>
         <p className="text-xs text-muted-foreground truncate">
