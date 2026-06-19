@@ -4,6 +4,7 @@ import { api } from "../lib/api";
 import { cartStore } from "../lib/cart-store";
 import { useTapTracker } from "../lib/tap-tracker";
 import type { Issue, ReorderCart, Resolution } from "../lib/types";
+import { foodImage } from "../lib/food-images";
 
 export const Route = createFileRoute("/review")({
   head: () => ({ meta: [{ title: "Review your reorder · Re:Bite" }] }),
@@ -75,9 +76,14 @@ function Review() {
           <ul className="space-y-3">
             {cart.items.map((it) => (
               <li key={it.item_id} className="flex items-start gap-3">
-                <span className="w-11 h-11 rounded-xl bg-white grid place-items-center text-2xl shrink-0">
-                  {it.emoji ?? "🍽️"}
-                </span>
+                <img
+                  src={foodImage(it.name)}
+                  alt={it.name}
+                  loading="lazy"
+                  width={44}
+                  height={44}
+                  className="w-11 h-11 rounded-xl object-cover shrink-0 bg-white"
+                />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-2">
                     <p className={`font-semibold text-foreground ${!it.available ? "line-through opacity-60" : ""}`}>
