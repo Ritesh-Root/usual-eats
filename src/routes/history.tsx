@@ -5,6 +5,7 @@ import { api } from "../lib/api";
 import { cartStore } from "../lib/cart-store";
 import { useTapTracker } from "../lib/tap-tracker";
 import type { OrderSummary } from "../lib/types";
+import { foodImage } from "../lib/food-images";
 
 export const Route = createFileRoute("/history")({
   head: () => ({ meta: [{ title: "Order history · Re:Bite" }] }),
@@ -39,10 +40,18 @@ function History() {
         {orders?.map((o) => (
           <article key={o.order_id} className="rounded-2xl bg-card border border-border/60 p-4">
             <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
+              <img
+                src={foodImage(o.items_preview[0]?.name ?? "")}
+                alt={o.items_preview[0]?.name ?? "Item"}
+                loading="lazy"
+                width={56}
+                height={56}
+                className="w-14 h-14 rounded-xl object-cover shrink-0 bg-muted"
+              />
+              <div className="min-w-0 flex-1">
                 <p className="font-bold text-foreground truncate">{o.restaurant_name}</p>
                 <p className="text-xs text-muted-foreground truncate">
-                  {o.items_preview.map((i) => `${i.emoji ?? ""} ${i.name}`).join(" · ")}
+                  {o.items_preview.map((i) => i.name).join(" · ")}
                 </p>
                 <p className="text-[11px] text-muted-foreground mt-1">
                   {new Date(o.last_ordered_at).toLocaleDateString()} · ₹{o.total} · ordered {o.order_count}×
