@@ -45,7 +45,7 @@ function Home() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto pb-28">
+    <div className="flex-1 overflow-y-auto pb-32">
       <header className="px-6 pt-8 pb-4">
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Wed · 19 Jun</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground">

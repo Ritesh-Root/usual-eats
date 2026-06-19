@@ -1,16 +1,21 @@
 import type { OrderSummary, ReorderCart, Confirmation, OrderDetail, IssueCode, Resolution } from "./types";
+import { userStore } from "./user-store";
 
-const ADDRESSES = [
-  { id: "a_home", label: "Home", line: "402, Sunshine Apts, Koramangala, Bengaluru", serviceable: true },
-  { id: "a_work", label: "Work", line: "WeWork Galaxy, Residency Rd, Bengaluru", serviceable: true },
-  { id: "a_mom", label: "Mom's", line: "12, Jayanagar 4th Block, Bengaluru", serviceable: true },
-];
-
-const PAYMENTS = [
-  { id: "p_upi", label: "GPay UPI · arjun@oksbi", type: "UPI", expired: false },
-  { id: "p_card", label: "HDFC Credit Card ··4421", type: "CARD", expired: false },
-  { id: "p_cod", label: "Cash on Delivery", type: "COD", expired: false },
-];
+function currentAddresses() {
+  const u = userStore.get();
+  return u.addresses;
+}
+function currentPayments() {
+  return userStore.get().payments;
+}
+function defaultAddress() {
+  const u = userStore.get();
+  return u.addresses.find((a) => a.id === u.defaultAddressId) ?? u.addresses[0];
+}
+function defaultPayment() {
+  const u = userStore.get();
+  return u.payments.find((p) => p.id === u.defaultPaymentId) ?? u.payments[0];
+}
 
 export const MOCK_HISTORY: OrderSummary[] = [
   {
@@ -117,8 +122,8 @@ function baseCart(sourceId: string): ReorderCart {
         emoji: src.items_preview[1]?.emoji ?? "🍵",
       },
     ],
-    delivery_address: ADDRESSES[0],
-    payment_method: PAYMENTS[0],
+    delivery_address: defaultAddress(),
+    payment_method: defaultPayment(),
     subtotal: 240,
     original_subtotal: 240,
     delivery_fee: 25,
@@ -127,8 +132,8 @@ function baseCart(sourceId: string): ReorderCart {
     min_order_met: true,
     issues: [],
     ready_to_place: true,
-    saved_addresses: ADDRESSES,
-    saved_payments: PAYMENTS,
+    saved_addresses: currentAddresses(),
+    saved_payments: currentPayments(),
   };
 }
 

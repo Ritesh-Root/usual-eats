@@ -35,7 +35,7 @@ function History() {
         <h1 className="text-lg font-extrabold text-foreground">Order history</h1>
       </header>
 
-      <div className="flex-1 overflow-y-auto p-5 space-y-3">
+      <div className="flex-1 overflow-y-auto p-5 pb-28 space-y-3">
         {isLoading && <p className="text-sm text-muted-foreground">Loading…</p>}
         {orders?.map((o) => (
           <article key={o.order_id} className="rounded-2xl bg-card border border-border/60 p-4">

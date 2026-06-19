@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TapTrackerProvider, useTapTracker } from "../lib/tap-tracker";
+import { BottomNav } from "../components/bottom-nav";
 
 function NotFoundComponent() {
   return (
@@ -133,6 +134,7 @@ function AppFrame({ children }: { children: ReactNode }) {
       <div className="relative w-full max-w-[440px] min-h-[860px] rounded-[40px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] overflow-hidden border border-border/60">
         <TapBadge />
         <div className="h-full flex flex-col">{children}</div>
+        <BottomNav />
       </div>
     </div>
   );
