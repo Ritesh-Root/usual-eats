@@ -16,7 +16,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Primary"
-      className="absolute left-3 right-3 z-30 rounded-full bg-brand-ink/95 backdrop-blur shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] px-2 py-2 flex items-center justify-between"
+      className="absolute left-3 right-3 z-30 rounded-full bg-brand-ink/95 backdrop-blur shadow-[0_20px_40px_-10px_rgba(0,0,0,0.4)] px-2 py-2 flex items-center justify-around"
       style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       {TABS.map((t) => {
@@ -27,7 +27,7 @@ export function BottomNav() {
           <Link
             key={t.to}
             to={t.to}
-            className={`flex-1 flex flex-col items-center gap-0.5 rounded-full py-2 text-[10px] font-bold transition ${
+            className={`flex flex-col items-center gap-0.5 rounded-full py-2 px-4 text-[10px] font-bold transition ${
               active ? "bg-primary-foreground text-brand-ink" : "text-primary-foreground/70"
             }`}
             aria-current={active ? "page" : undefined}

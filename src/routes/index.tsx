@@ -129,10 +129,13 @@ function UsualCard({
       <div className="flex items-start justify-between gap-3">
         <div>
           <span
-            className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand-ink"
+            className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand-ink"
             style={{ backgroundColor: palette.chip }}
           >
-            ⭐ Weekly usual
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            Weekly usual
           </span>
           <h3 className="mt-3 text-xl font-extrabold text-brand-ink leading-tight">{order.restaurant_name}</h3>
           <p className="mt-1 text-sm text-brand-ink/70">
