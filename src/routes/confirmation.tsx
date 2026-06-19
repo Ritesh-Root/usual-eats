@@ -22,8 +22,8 @@ function Confirmation() {
   return (
     <div className="flex-1 flex flex-col bg-brand-mint/30">
       <div className="flex-1 flex flex-col items-center justify-center text-center px-8">
-        <div className="w-24 h-24 rounded-full bg-brand-ink text-primary-foreground grid place-items-center text-5xl shadow-xl">
-          {conf.status === "scheduled" ? "📅" : "🎉"}
+        <div className="w-24 h-24 rounded-full bg-brand-ink text-primary-foreground grid place-items-center shadow-xl">
+          {conf.status === "scheduled" ? <Calendar className="w-10 h-10" /> : <Check className="w-10 h-10" strokeWidth={3} />}
         </div>
         <h1 className="mt-6 text-3xl font-extrabold text-foreground">
           {conf.status === "scheduled" ? "Scheduled!" : "Order confirmed!"}
