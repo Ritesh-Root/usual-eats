@@ -107,7 +107,7 @@ function Payments() {
                       : "bg-card border-border"
                   }`}
                 >
-                  <span className="block text-base">{t.icon}</span>
+                  <span className="grid place-items-center mb-1"><t.Icon className="w-4 h-4" /></span>
                   {t.label}
                 </button>
               ))}
