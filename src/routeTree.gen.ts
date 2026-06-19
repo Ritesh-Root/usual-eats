@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReviewRouteImport } from './routes/review'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PaymentsRouteImport } from './routes/payments'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ConfirmationRouteImport } from './routes/confirmation'
@@ -25,6 +26,11 @@ const ReviewRoute = ReviewRouteImport.update({
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentsRoute = PaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoryRoute = HistoryRouteImport.update({
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/confirmation': typeof ConfirmationRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/payments': typeof PaymentsRoute
   '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/confirmation': typeof ConfirmationRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/payments': typeof PaymentsRoute
   '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/confirmation': typeof ConfirmationRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/payments': typeof PaymentsRoute
   '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/confirmation'
     | '/dashboard'
     | '/history'
+    | '/payments'
     | '/profile'
     | '/review'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/confirmation'
     | '/dashboard'
     | '/history'
+    | '/payments'
     | '/profile'
     | '/review'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/confirmation'
     | '/dashboard'
     | '/history'
+    | '/payments'
     | '/profile'
     | '/review'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   ConfirmationRoute: typeof ConfirmationRoute
   DashboardRoute: typeof DashboardRoute
   HistoryRoute: typeof HistoryRoute
+  PaymentsRoute: typeof PaymentsRoute
   ProfileRoute: typeof ProfileRoute
   ReviewRoute: typeof ReviewRoute
 }
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payments': {
+      id: '/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof PaymentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/history': {
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConfirmationRoute: ConfirmationRoute,
   DashboardRoute: DashboardRoute,
   HistoryRoute: HistoryRoute,
+  PaymentsRoute: PaymentsRoute,
   ProfileRoute: ProfileRoute,
   ReviewRoute: ReviewRoute,
 }
