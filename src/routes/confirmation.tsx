@@ -1,5 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { Calendar, Check } from "lucide-react";
 import { cartStore } from "../lib/cart-store";
 import { useTapTracker } from "../lib/tap-tracker";
 
