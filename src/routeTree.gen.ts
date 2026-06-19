@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReviewRouteImport } from './routes/review'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ConfirmationRouteImport } from './routes/confirmation'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const ReviewRoute = ReviewRouteImport.update({
   id: '/review',
   path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoryRoute = HistoryRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/confirmation': typeof ConfirmationRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/confirmation': typeof ConfirmationRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,28 @@ export interface FileRoutesById {
   '/confirmation': typeof ConfirmationRoute
   '/dashboard': typeof DashboardRoute
   '/history': typeof HistoryRoute
+  '/profile': typeof ProfileRoute
   '/review': typeof ReviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/confirmation' | '/dashboard' | '/history' | '/review'
+  fullPaths:
+    | '/'
+    | '/confirmation'
+    | '/dashboard'
+    | '/history'
+    | '/profile'
+    | '/review'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/confirmation' | '/dashboard' | '/history' | '/review'
-  id: '__root__' | '/' | '/confirmation' | '/dashboard' | '/history' | '/review'
+  to: '/' | '/confirmation' | '/dashboard' | '/history' | '/profile' | '/review'
+  id:
+    | '__root__'
+    | '/'
+    | '/confirmation'
+    | '/dashboard'
+    | '/history'
+    | '/profile'
+    | '/review'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +98,7 @@ export interface RootRouteChildren {
   ConfirmationRoute: typeof ConfirmationRoute
   DashboardRoute: typeof DashboardRoute
   HistoryRoute: typeof HistoryRoute
+  ProfileRoute: typeof ProfileRoute
   ReviewRoute: typeof ReviewRoute
 }
 
@@ -86,6 +109,13 @@ declare module '@tanstack/react-router' {
       path: '/review'
       fullPath: '/review'
       preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/history': {
@@ -124,6 +154,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConfirmationRoute: ConfirmationRoute,
   DashboardRoute: DashboardRoute,
   HistoryRoute: HistoryRoute,
+  ProfileRoute: ProfileRoute,
   ReviewRoute: ReviewRoute,
 }
 export const routeTree = rootRouteImport
