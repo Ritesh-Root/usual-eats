@@ -86,8 +86,14 @@ function getScenario(): IssueCode | "HAPPY" {
   return s ?? "HAPPY";
 }
 
-function baseCart(sourceId: string): ReorderCart {
-  const src = MOCK_HISTORY.find((o) => o.order_id === sourceId) ?? MOCK_HISTORY[0];
+function baseCart(sourceId: string, hint?: OrderSummary): ReorderCart {
+  const src =
+    MOCK_HISTORY.find((o) => o.order_id === sourceId) ??
+    (hint
+      ? {
+          ...hint,
+        }
+      : MOCK_HISTORY[0]);
   return {
     cart_id: "c_" + Math.random().toString(36).slice(2, 8),
     source_order_id: src.order_id,
@@ -104,8 +110,8 @@ function baseCart(sourceId: string): ReorderCart {
         name: src.items_preview[0]?.name ?? "Veg Thali",
         qty: 1,
         customizations: ["Less spicy", "Extra roti"],
-        unit_price: 180,
-        original_unit_price: 180,
+        unit_price: Math.round((src.total ?? 240) * 0.7),
+        original_unit_price: Math.round((src.total ?? 240) * 0.7),
         available: true,
         price_changed: false,
         emoji: src.items_preview[0]?.emoji ?? "🍛",
@@ -113,10 +119,10 @@ function baseCart(sourceId: string): ReorderCart {
       {
         item_id: "i_2",
         name: src.items_preview[1]?.name ?? "Masala Chai",
-        qty: 2,
+        qty: 1,
         customizations: ["No sugar"],
-        unit_price: 30,
-        original_unit_price: 30,
+        unit_price: Math.max(40, Math.round((src.total ?? 240) * 0.3)),
+        original_unit_price: Math.max(40, Math.round((src.total ?? 240) * 0.3)),
         available: true,
         price_changed: false,
         emoji: src.items_preview[1]?.emoji ?? "🍵",
@@ -124,10 +130,10 @@ function baseCart(sourceId: string): ReorderCart {
     ],
     delivery_address: defaultAddress(),
     payment_method: defaultPayment(),
-    subtotal: 240,
-    original_subtotal: 240,
+    subtotal: 0,
+    original_subtotal: 0,
     delivery_fee: 25,
-    total: 265,
+    total: 0,
     min_order_value: 99,
     min_order_met: true,
     issues: [],
@@ -230,8 +236,12 @@ function applyScenario(cart: ReorderCart, scenario: IssueCode | "HAPPY"): Reorde
   return cart;
 }
 
-export function mockReorder(sourceId: string): ReorderCart {
-  const cart = baseCart(sourceId);
+export function mockReorder(sourceId: string, hint?: OrderSummary): ReorderCart {
+  const cart = baseCart(sourceId, hint);
+  // Recompute totals from items so they match the hinted order.
+  cart.subtotal = cart.items.reduce((s, i) => s + i.unit_price * i.qty, 0);
+  cart.original_subtotal = cart.subtotal;
+  cart.total = cart.subtotal + cart.delivery_fee;
   return applyScenario(cart, getScenario());
 }
 
@@ -304,11 +314,11 @@ export function mockHistory(): OrderSummary[] {
   return MOCK_HISTORY;
 }
 
-export function mockOrderDetail(id: string): OrderDetail {
-  const o = MOCK_HISTORY.find((x) => x.order_id === id) ?? MOCK_HISTORY[0];
+export function mockOrderDetail(id: string, hint?: OrderSummary): OrderDetail {
+  const o = MOCK_HISTORY.find((x) => x.order_id === id) ?? hint ?? MOCK_HISTORY[0];
   return {
     ...o,
-    items: baseCart(o.order_id).items,
+    items: baseCart(o.order_id, hint).items,
   };
 }
 
