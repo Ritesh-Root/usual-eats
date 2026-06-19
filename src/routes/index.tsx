@@ -49,7 +49,7 @@ function Home() {
       <header className="px-6 pt-8 pb-4">
         <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Wed · 19 Jun</p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-foreground">
-          Hi Arjun <span className="inline-block animate-wave">👋</span>
+          Hi Arjun
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">Your usuals are ready. Tap to reorder.</p>
       </header>
