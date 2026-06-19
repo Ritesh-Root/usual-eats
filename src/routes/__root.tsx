@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { TapTrackerProvider, useTapTracker } from "../lib/tap-tracker";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Re:Bite — your usuals, one tap away" },
+      { name: "description", content: "Frictionless weekly meal reorders. Two taps from craving to confirmed." },
+      { property: "og:title", content: "Re:Bite — your usuals, one tap away" },
+      { property: "og:description", content: "Frictionless weekly meal reorders. Two taps from craving to confirmed." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
@@ -118,8 +118,49 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <TapTrackerProvider>
+        <AppFrame>
+          <Outlet />
+        </AppFrame>
+      </TapTrackerProvider>
     </QueryClientProvider>
+  );
+}
+
+function AppFrame({ children }: { children: ReactNode }) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[radial-gradient(circle_at_top,_var(--brand-yellow)_0%,_var(--background)_55%)] p-3 sm:p-6">
+      <div className="relative w-full max-w-[440px] min-h-[860px] rounded-[40px] bg-card shadow-[0_30px_80px_-30px_rgba(0,0,0,0.25)] overflow-hidden border border-border/60">
+        <TapBadge />
+        <div className="h-full flex flex-col">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function TapBadge() {
+  const t = useTapTracker();
+  if (!t.visible) {
+    return (
+      <button
+        data-no-tap
+        onClick={t.toggleVisible}
+        className="absolute top-3 right-3 z-50 rounded-full bg-brand-ink/80 text-primary-foreground text-[10px] px-2 py-1 font-semibold tracking-wide"
+        aria-label="Show tap counter"
+      >
+        SHOW TAPS
+      </button>
+    );
+  }
+  return (
+    <div
+      data-no-tap
+      className="absolute top-3 right-3 z-50 flex items-center gap-2 rounded-full bg-brand-ink text-primary-foreground px-3 py-1.5 text-[11px] font-semibold shadow-lg"
+    >
+      <span className="opacity-70">TAPS</span>
+      <span className="text-base font-bold tabular-nums">{t.taps}</span>
+      <button onClick={t.reset} className="opacity-70 hover:opacity-100" aria-label="Reset tap counter">↻</button>
+      <button onClick={t.toggleVisible} className="opacity-70 hover:opacity-100" aria-label="Hide tap counter">×</button>
+    </div>
   );
 }
