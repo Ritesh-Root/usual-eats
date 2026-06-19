@@ -40,10 +40,10 @@ function Profile() {
       </section>
 
       <nav className="px-6 mt-6 space-y-2" aria-label="Profile sections">
-        <Row to="/addresses" label="Saved addresses" sub={`${user.addresses.length} saved · default ${user.addresses.find((a) => a.id === user.defaultAddressId)?.label ?? "—"}`} icon="📍" />
-        <Row to="/payments" label="Payment methods" sub={`${user.payments.length} saved · default ${user.payments.find((p) => p.id === user.defaultPaymentId)?.label.split(" ")[0] ?? "—"}`} icon="💳" />
-        <Row to="/settings" label="Preferences" sub="Notifications, language, dietary" icon="⚙️" />
-        <Row to="/history" label="Order history" sub="All past orders" icon="🧾" />
+        <Row to="/addresses" label="Saved addresses" sub={`${user.addresses.length} saved · default ${user.addresses.find((a) => a.id === user.defaultAddressId)?.label ?? "—"}`} Icon={MapPin} />
+        <Row to="/payments" label="Payment methods" sub={`${user.payments.length} saved · default ${user.payments.find((p) => p.id === user.defaultPaymentId)?.label.split(" ")[0] ?? "—"}`} Icon={CreditCard} />
+        <Row to="/settings" label="Preferences" sub="Notifications, language, dietary" Icon={Settings} />
+        <Row to="/history" label="Order history" sub="All past orders" Icon={Receipt} />
       </nav>
 
       <div className="px-6 mt-6 space-y-2">
